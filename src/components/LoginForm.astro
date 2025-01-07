@@ -3,7 +3,7 @@ import { Notification } from 'accessible-astro-components'
 import { Icon } from 'astro-icon'
 ---
 
-<form class="login-form space-content" method="post">
+<form class="" method="post">
   <Notification type="warning">
     <Icon pack="majesticons" name="emoji-sad-line" /><p class="size-12">Incorrect email and password combination. Please try again.</p>
   </Notification>
@@ -45,35 +45,3 @@ import { Icon } from 'astro-icon'
     }
   })
 </script>
-
-<style lang="scss" is:global>
-  @use '../assets/scss/base/border' as *;
-  @use '../assets/scss/base/space' as *;
-
-  .login-form {
-    label {
-      display: block;
-      margin-bottom: $space-8;
-    }
-
-    input {
-      width: 100%;
-      @include radius-small;
-    }
-
-    input {
-      padding: $space-8;
-      border: 2px solid var(--neutral-600);
-    }
-
-    .checkbox {
-      display: flex;
-      align-items: center;
-      gap: $space-4;
-
-      input {
-        width: auto;
-      }
-    }
-  }
-</style>

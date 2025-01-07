@@ -3,37 +3,37 @@ import ResponsiveToggle from './ResponsiveToggle.astro'
 import { Icon } from 'astro-icon'
 ---
 
-<div id="main-navigation" class="is-desktop">
-  <div class="desktop-menu">
+<div id="main-navigation" class="">
+  <div id="desktop-menu" class="">
     <nav>
       <ul>
-        <li class="brand-logo">
+        <li class="">
           <img src={(await import('../assets/img/logo.svg')).default} >
-          <span class="sr-only">Brand Name</span>
+          <span class="">Brand Name</span>
         </li>
         <li class="menu-item">
-          <button class="toggle-expanded-view" aria-expanded="false">
+          <button class="" aria-expanded="false">
             <Icon pack="majesticons" name="chevron-double-right-line" /> 
-            <span class="sr-only">Expand menu</span>
+            <span class="">Expand menu</span>
           </button>
         </li>
         <slot />
         <li class="menu-item bottom-position">
           <a href="/login/">
             <Icon pack="majesticons" name="logout-line" /> 
-            <span class="sr-only">Logout</span>
+            <span class="">Logout</span>
           </a>
         </li>
         <li class="menu-item bottom-position user-avatar">
           <a href="/settings/" class="logout-link">
             <img src="/user-avatar.png" alt="">
-            <span class="sr-only">Settings</span>
+            <span class="">Settings</span>
           </a>
         </li>
       </ul>
     </nav>
   </div>
-  <div class="container mobile-menu padding-16">
+  <div class="">
     <a href="/">
       <img src={(await import('../assets/img/logo.svg')).default} alt="Your Logo">
     </a>
@@ -41,16 +41,16 @@ import { Icon } from 'astro-icon'
     <nav>
       <ul>
         <slot />
-        <li class="menu-item">
+        <li class="">
           <a href="/login">
             <Icon pack="majesticons" name="logout-line" /> 
-            <span class="sr-only">Logout</span>
+            <span class="">Logout</span>
           </a>
         </li>
-        <li class="menu-item user-avatar">
+        <li class="">
           <a href="/settings">
             <img src="/user-avatar.png" alt="">
-            <span class="sr-only">Settings</span>
+            <span class="">Settings</span>
           </a>
         </li>
       </ul>
@@ -166,224 +166,3 @@ import { Icon } from 'astro-icon'
     expandMenu()
   }
 </script>
-
-<style lang="scss" is:global>
-  @use '../assets/scss/base/border' as *;
-  @use '../assets/scss/base/breakpoint' as *;
-  @use '../assets/scss/base/elevation' as *;
-  @use '../assets/scss/base/size' as *;
-
-  #main-navigation {
-    background-color: var(--neutral-900);
-
-    > .container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    &.is-desktop {
-      width: 60px;
-      min-height: 100vh;
-      position: fixed;
-      z-index: 1;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
-
-      .mobile-menu { 
-        display: none; 
-      }
-    }
-
-    &.is-mobile {
-      flex-direction: column;
-
-      .mobile-menu { 
-        nav {
-          display: none; 
-        }
-
-        &.show nav {
-          display: block;
-        }
-      }
-
-      .responsive-toggle {
-        display: block;
-      }
-
-      .desktop-menu {
-        display: none;
-      }
-    }
-
-    nav {
-      width: 100%;
-
-      > ul {
-        display: flex;
-        width: 100%;
-
-        .is-active {
-          font-weight: bold;
-        }
-      }
-
-      li,
-      a,
-      button {
-        width: 100%;
-      }
-
-      a,
-      button {
-        display: flex;
-        justify-content: center;
-        padding: 1rem 0;
-        color: var(--neutral-400);
-        transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-      }
-
-      .user-avatar a {
-        padding: 0;
-        
-        img {
-          padding: 0.5rem;
-          max-width: 60px;
-          border-radius: 100%;
-        }
-      }
-
-      button {
-        border: none;
-      }
-
-      svg {
-        width: 30px;
-      
-        path {
-          fill: var(--neutral-600);
-          transition: fill 0.2s ease-in-out;
-        }
-      }
-
-      a:hover,
-      a:focus,
-      a.is-active,
-      button:hover, 
-      button:not(.toggle-expanded-view):focus {
-        color: var(--neutral-800);
-        background-color: var(--secondary-200);
-
-        svg path {
-          fill: var(--neutral-800);
-        }
-      }
-    }
-
-    .desktop-menu {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 100vh;
-
-      ul {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-        position: relative;
-
-        .bottom-position {
-          position: absolute;
-        }
-
-        .bottom-position:nth-last-of-type(1) { bottom: 0; }
-        .bottom-position:nth-last-of-type(2) { bottom: 3.75rem; }
-        .bottom-position:nth-last-of-type(3) { bottom: 8rem; }
-
-        .brand-logo {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 1rem;
-          color: var(--neutral-100);
-          background-color: var(--neutral-700);
-
-          img {
-            max-height: 18px;
-          }
-        }
-      }
-
-      .toggle-expanded-view {
-        svg {
-          padding-top: 3px;
-        }
-
-        span {
-        text-decoration: underline;
-        }
-
-        &:hover,
-        &:focus {
-          span {
-            text-decoration: none;
-          }
-        }
-      }
-    }
-
-    &.is-expanded {
-      width: 200px;
-
-      .desktop-menu {
-        a,
-        button {
-          justify-content: left;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 1rem 0.75rem;
-        }
-
-        .user-avatar a {
-          padding: 0.5rem 0.3rem 0;
-        }
-      } 
-
-      ~ main {
-        margin-left: 200px;
-      }
-    }
-
-    .mobile-menu nav {
-      > ul {
-        flex-direction: column;
-        margin-top: 1rem;
-
-        a {
-          justify-content: start;
-          align-items: center;
-          gap: 0.5rem;
-
-          &:hover,
-          &:focus {
-            color: var(--secondary-200);
-            background-color: transparent;
-
-            svg path {
-              fill: var(--secondary-200);
-            }
-          }
-        }
-      }
-
-      svg {
-        width: 35px;
-      
-        path {
-          transition: fill 0.2s ease-in-out;
-        }
-      }
-    }
-  }
-</style>

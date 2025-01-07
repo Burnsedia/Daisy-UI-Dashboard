@@ -1,4 +1,4 @@
-<button class="responsive-toggle" aria-expanded="false" aria-label="Open menu navigation">
+<button class="" aria-expanded="false" aria-label="Open menu navigation">
   <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 8h12M6 12h12M6 16h12"/></svg>
 </button>
 
@@ -51,28 +51,3 @@
   })
 </script>
 
-<style lang="scss" is:global>
-  @use "../assets/scss/base/breakpoint" as *;
-  @use "../assets/scss/base/outline" as *;
-
-  .responsive-toggle {
-    display: none;
-    padding: 0;
-    border: none;
-
-    svg {
-      width: 30px;
-    
-      path {
-        stroke: var(--secondary-100);
-        transition: stroke 0.2s ease-in-out;
-      }
-    }
-
-    &:hover {
-      svg path {
-        stroke: var(--primary-400);
-      }
-    }
-  }
-</style>
