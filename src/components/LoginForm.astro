@@ -1,47 +1,57 @@
----
-import { Notification } from 'accessible-astro-components'
-import { Icon } from 'astro-icon'
----
+<!-- DaisyUI Login Form -->
+<form class="flex flex-col gap-4 p-6 bg-base-200 shadow-md rounded-lg w-96 mx-auto">
+  <!-- Notification -->
+  <div id="notification" class="alert alert-warning hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 1 1-10 10A10 10 0 0 1 12 2z" />
+    </svg>
+    <span>Incorrect email and password combination. Please try again.</span>
+  </div>
 
-<form class="" method="post">
-  <Notification type="warning">
-    <Icon pack="majesticons" name="emoji-sad-line" /><p class="size-12">Incorrect email and password combination. Please try again.</p>
-  </Notification>
-  <div class="login-form__controls">
-    <label for="email">Email</label>
-    <input type="email" name="email" required>
-  </div>
-  <div class="login-form__controls">
-    <label for="password">Password</label>
-    <input type="password" name="password" required>
-  </div>
-  <button class="button color-secondary behavior-full" type="submit">Login</button>
-  <label class="checkbox">
-    <input type="checkbox" name="remember">
-    <span>Remember me</span>
+  <!-- Email Input -->
+  <label class="form-control w-full">
+    <div class="label"><span class="label-text">Email</span></div>
+    <input type="email" name="email" class="input input-bordered w-full" required />
   </label>
-  <a href="#">Forgot password?</a>
-</form> 
+
+  <!-- Password Input -->
+  <label class="form-control w-full">
+    <div class="label"><span class="label-text">Password</span></div>
+    <input type="password" name="password" class="input input-bordered w-full" required />
+  </label>
+
+  <!-- Remember Me Checkbox -->
+  <label class="label cursor-pointer">
+    <input type="checkbox" name="remember" class="checkbox" />
+    <span class="label-text ml-2">Remember me</span>
+  </label>
+
+  <!-- Submit Button -->
+  <button id="submit-btn" class="btn btn-secondary w-full">Login</button>
+
+  <!-- Forgot Password Link -->
+  <a href="#" class="text-sm text-primary text-center">Forgot password?</a>
+</form>
 
 <script>
-  // variables
-  const form = document.querySelector('.login-form')
-  const notification = form.querySelector('.notification')
-  const emailInput = form.querySelector('input[name="email"]')
-  const passwordInput = form.querySelector('input[name="password"]')
-  const submitButton = form.querySelector('button')
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const notification = document.getElementById('notification');
+    const emailInput = form.querySelector('input[name="email"]');
+    const passwordInput = form.querySelector('input[name="password"]');
+    const submitButton = document.getElementById('submit-btn');
 
-  // execution
-  notification.style.display = 'none'
+    notification.classList.add('hidden');
 
-  submitButton.addEventListener('click', event => {
-    event.preventDefault()
+    submitButton.addEventListener('click', event => {
+      event.preventDefault();
 
-    if (emailInput.value === 'admin@astro.demo' && passwordInput.value === 'Astronaut570') {
-      localStorage.setItem('isLoggedIn', 'true')
-      window.location.href = '/'
-    } else {
-      notification.style.display = 'flex'
-    }
-  })
+      if (emailInput.value === 'admin@astro.demo' && passwordInput.value === 'Astronaut570') {
+        localStorage.setItem('isLoggedIn', 'true');
+        window.location.href = '/';
+      } else {
+        notification.classList.remove('hidden');
+      }
+    });
+  });
 </script>
