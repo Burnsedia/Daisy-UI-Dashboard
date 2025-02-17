@@ -1,45 +1,45 @@
+<!-- DaisyUI Dashboard Index Page -->
 ---
 import DefaultLayout from '../layouts/DefaultLayout.astro'
 import DashboardWidget from '../components/DashboardWidget.astro';
 ---
 
 <DefaultLayout title="Dashboard">
-  <section>
-    <h1>Welcome Astronaut 🧑‍🚀</h1><br>
-    <p class="size-20">Build fast dashboards, faster (and accessible).</p>
+  <section class="p-6">
+    <h1 class="text-3xl font-bold">Welcome Astronaut 🧑‍🚀</h1>
+    <p class="text-lg mt-2">Build fast dashboards, faster (and accessible).</p>
   </section>
-  <section class="margin-32">
-    <div class="space-content">
-      <div class="contents">
-        <h2>Widgets</h2>
-        <p id="current-time" class="size-12"></p>
+
+  <section class="mt-8">
+    <div class="p-6 bg-base-100 shadow-lg rounded-lg">
+      <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-semibold">Widgets</h2>
+        <p id="current-time" class="text-sm text-gray-500"></p>
       </div>
-      <div class="grid small-grid-1 medium-grid-2 large-grid-3 equal-height">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
         <DashboardWidget />
-        <DashboardWidget
-          number="+33"
-          title="Products sold"
-        />
-        <DashboardWidget
-          number="-120"
-          title="Images deleted"
-          type="error"
-        />
-        <div class="radius-large space-96" style="border: 4px dashed grey;"></div>
-        <div class="radius-large space-96" style="border: 4px dashed grey;"></div>
-        <div class="radius-large space-96" style="border: 4px dashed grey;"></div>
-        <div class="radius-large space-96" style="border: 4px dashed grey;"></div>
-        <div class="radius-large space-96" style="border: 4px dashed grey;"></div>
-        <div class="radius-large space-96" style="border: 4px dashed grey;"></div>
-        <div class="radius-large space-96" style="border: 4px dashed grey;"></div>
-        <div class="radius-large space-96" style="border: 4px dashed grey;"></div>
-        <div class="radius-large space-96" style="border: 4px dashed grey;"></div>
+        <DashboardWidget number="+33" title="Products sold" />
+        <DashboardWidget number="-120" title="Images deleted" type="error" />
+        
+        <!-- Placeholder widgets -->
+        <div class="h-32 border-4 border-dashed border-gray-300 rounded-lg"></div>
+        <div class="h-32 border-4 border-dashed border-gray-300 rounded-lg"></div>
+        <div class="h-32 border-4 border-dashed border-gray-300 rounded-lg"></div>
+        <div class="h-32 border-4 border-dashed border-gray-300 rounded-lg"></div>
+        <div class="h-32 border-4 border-dashed border-gray-300 rounded-lg"></div>
+        <div class="h-32 border-4 border-dashed border-gray-300 rounded-lg"></div>
+        <div class="h-32 border-4 border-dashed border-gray-300 rounded-lg"></div>
+        <div class="h-32 border-4 border-dashed border-gray-300 rounded-lg"></div>
+        <div class="h-32 border-4 border-dashed border-gray-300 rounded-lg"></div>
       </div>
     </div>
   </section>
 </DefaultLayout>
 
 <script>
-  const date = new Date()
-  document.querySelector('#current-time').innerHTML = `<em>${date.toDateString()}</em>`
+  document.addEventListener("DOMContentLoaded", () => {
+    const date = new Date();
+    document.querySelector("#current-time").innerHTML = `<em>${date.toDateString()}</em>`;
+  });
 </script>
