@@ -6,13 +6,9 @@ const {
 } = Astro.props
 ---
 
-<div class="">
-  <p class="">
-    <strong>{number}</strong>
-  </p>
-  <p class="">
-    <em>{title}</em>
-  </p>
+<div class="card bg-base-100 shadow-lg p-6 text-center">
+  <div class="card-body">
+    <p class="text-5xl font-bold text-{type}">{number}</p>
+    <p class="text-lg italic">{title}</p>
+  </div>
 </div>
-
-
