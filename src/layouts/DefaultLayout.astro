@@ -1,78 +1,76 @@
 ---
-//import '../assets/scss/globals.scss'
 import Navigation from '../components/Navigation.astro'
 import { DarkMode, SkipLinks } from 'accessible-astro-components'
 import { Icon } from 'astro-icon'
 
-const {title} = Astro.props
+const { title } = Astro.props
 let subtitle = 'Accessible Astro Dashboard'
 ---
 
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-theme="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- favicon -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-    <!-- google fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <!-- open graph -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Accessible Astro Dashboard">
-    <meta property="og:description" content="An Accessible Dashboard Theme for Astro including a login page, a dashboard page and several other pages and components.">
+    <meta property="og:description" content="An Accessible Dashboard Theme for Astro including a login page, a dashboard page, and several other pages and components.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dashboard.accessible-astro.dev">
     <meta property="og:image" content="/social-preview-image.png">
 
-    <!-- page title -->
+    <!-- Page Title -->
     <title>{title} - {subtitle}</title>
   </head>
-  <body>
-    <header>
+  <body class="bg-base-200">
+    <header class="p-4 shadow-md bg-base-100 flex justify-between items-center">
       <SkipLinks />
+      <DarkMode class="ml-auto" />
     </header>
-    <div class="ui-controls">
-      <DarkMode />
-    </div>
-    <div class="admin-interface">
-      <Navigation>
-        <li class="menu-item">
-          <a href="/">
-            <Icon pack="majesticons" name="home-line" /> 
-            <span class="sr-only">Dashboard</span>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/products/">
-            <Icon pack="majesticons" name="shopping-cart-line" /> 
-            <span class="sr-only">Products</span>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/users/">
-            <Icon pack="majesticons" name="users-line" /> 
-            <span class="sr-only">Users</span>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/messages/">
-            <Icon pack="majesticons" name="messages-line" /> 
-            <span class="sr-only">Messages</span>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/media/">
-            <Icon pack="majesticons" name="image-line" /> 
-            <span class="sr-only">Media</span>
-          </a>
-        </li>
-      </Navigation>    
-      <main id="main-content">
+
+    <div class="flex">
+      <!-- Sidebar Navigation -->
+      <aside class="w-64 min-h-screen bg-neutral text-neutral-content p-4">
+        <ul class="menu bg-base-100 w-full rounded-box">
+          <li>
+            <a href="/" class="flex items-center gap-2">
+              <Icon pack="majesticons" name="home-line" /> <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="/products/" class="flex items-center gap-2">
+              <Icon pack="majesticons" name="shopping-cart-line" /> <span>Products</span>
+            </a>
+          </li>
+          <li>
+            <a href="/users/" class="flex items-center gap-2">
+              <Icon pack="majesticons" name="users-line" /> <span>Users</span>
+            </a>
+          </li>
+          <li>
+            <a href="/messages/" class="flex items-center gap-2">
+              <Icon pack="majesticons" name="messages-line" /> <span>Messages</span>
+            </a>
+          </li>
+          <li>
+            <a href="/media/" class="flex items-center gap-2">
+              <Icon pack="majesticons" name="image-line" /> <span>Media</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <main id="main-content" class="p-6 flex-1">
         <slot />
       </main>
     </div>
@@ -80,10 +78,10 @@ let subtitle = 'Accessible Astro Dashboard'
 </html>
 
 <script>
-  let isLoggedIn = await localStorage.getItem('isLoggedIn')
-
-  if (isLoggedIn === null) {
-    window.location.href = '/login'
-  }
+  document.addEventListener('DOMContentLoaded', () => {
+    let isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+      window.location.href = '/login';
+    }
+  });
 </script>
-
