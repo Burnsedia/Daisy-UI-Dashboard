@@ -38,38 +38,8 @@ let subtitle = 'Accessible Astro Dashboard'
     </header>
 
     <div class="flex">
-      <!-- Sidebar Navigation -->
-      <aside class="w-64 min-h-screen bg-neutral text-neutral-content p-4">
-        <ul class="menu bg-base-100 w-full rounded-box">
-          <li>
-            <a href="/" class="flex items-center gap-2">
-              <Icon pack="majesticons" name="home-line" /> <span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a href="/products/" class="flex items-center gap-2">
-              <Icon pack="majesticons" name="shopping-cart-line" /> <span>Products</span>
-            </a>
-          </li>
-          <li>
-            <a href="/users/" class="flex items-center gap-2">
-              <Icon pack="majesticons" name="users-line" /> <span>Users</span>
-            </a>
-          </li>
-          <li>
-            <a href="/messages/" class="flex items-center gap-2">
-              <Icon pack="majesticons" name="messages-line" /> <span>Messages</span>
-            </a>
-          </li>
-          <li>
-            <a href="/media/" class="flex items-center gap-2">
-              <Icon pack="majesticons" name="image-line" /> <span>Media</span>
-            </a>
-          </li>
-        </ul>
-      </aside>
-
-      <!-- Main Content -->
+      <Navigation />
+            <!-- Main Content -->
       <main id="main-content" class="p-6 flex-1">
         <slot />
       </main>
