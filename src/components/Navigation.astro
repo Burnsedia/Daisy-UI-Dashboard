@@ -1,168 +1,32 @@
 ---
-import ResponsiveToggle from './ResponsiveToggle.astro'
 import { Icon } from 'astro-icon'
 ---
-
-<div id="main-navigation" class="">
-  <div id="desktop-menu" class="">
-    <nav>
-      <ul>
-        <li class="">
-          <!-- <img src={(await import('../assets/img/logo.svg')).default} > -->
-          <span class="">Brand Name</span>
-        </li>
-        <li class="menu-item">
-          <button class="" aria-expanded="false">
-            <Icon pack="majesticons" name="chevron-double-right-line" /> 
-            <span class="">Expand menu</span>
-          </button>
-        </li>
-        <slot />
-        <li class="menu-item bottom-position">
-          <a href="/login/">
-            <Icon pack="majesticons" name="logout-line" /> 
-            <span class="">Logout</span>
-          </a>
-        </li>
-        <li class="menu-item bottom-position user-avatar">
-          <a href="/settings/" class="logout-link">
-            <img src="/user-avatar.png" alt="">
-            <span class="">Settings</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="">
-    <a href="/">
-      <!-- <img src={(await import('../assets/img/logo.svg')).default} alt="Your Logo"> -->
+<aside class="h-screen sticky top-0 overflow-y-auto w-60 py-6 px-4 bg-base-200">
+    <a class="btn btn-ghost">
+        <img alt="Logo" src="/astro-logos.svg" class="w-6"/> 
+        <!-- <Icon pack="majesticons" name="home-line" /> <span>Dashboard</span> -->
     </a>
-    <ResponsiveToggle />
-    <nav>
-      <ul>
-        <slot />
-        <li class="">
-          <a href="/login">
-            <Icon pack="majesticons" name="logout-line" /> 
-            <span class="">Logout</span>
-          </a>
+
+    <ul class="menu px-0">
+        <li>
+            <a href="/products/" class="flex items-center gap-4">
+              <!-- <Icon pack="majesticons" name="shopping-cart-line" /> <span>Products</span> -->
+            </a>
         </li>
-        <li class="">
-          <a href="/settings">
-            <img src="/user-avatar.png" alt="">
-            <span class="">Settings</span>
-          </a>
+        <li>
+            <a href="/users/" class="flex items-center gap-4">
+              <!-- <Icon pack="majesticons" name="users-line" /> <span>Users</span> -->
+            </a>
         </li>
-      </ul>
-    </nav>
-  </div>
-</div>
-
-<script>
-  // variables
-  const mainNav = document.querySelector('#main-navigation')
-  const mainMenu = mainNav.querySelector('ul')
-  const toggleExpandedView = document.querySelector('.toggle-expanded-view')
-  const menuIconLabels = [...mainNav.querySelectorAll('.sr-only')]
-  const mediaQuery = window.matchMedia('(min-width: 48em)')
-  let isMenuExpanded = localStorage.getItem('isMenuExpanded')
-
-  // functions
-  const setActiveMenuItem = () => {
-    const menuItems = [...mainMenu.querySelectorAll('a:not([rel*="external"])')]
-
-    menuItems.forEach(menuItem => {
-      if (menuItem.pathname === window.location.pathname) {
-        menuItem.classList.add('is-active')
-        menuItem.setAttribute('aria-current', 'page')
-      }
-    })
-  }
-
-  const expandMenu = () => {
-    mainNav.classList.add('is-expanded')
-    localStorage.setItem('isMenuExpanded', 'true')
-    toggleExpandedView.setAttribute('aria-expanded', 'true')
-    toggleExpandedView.querySelector('span').textContent = 'Collapse menu'
-    
-    menuIconLabels.forEach(menuIconLabel => {
-      menuIconLabel.classList.remove('sr-only')
-    })
-  }
-
-  const collapseMenu = () => {
-    mainNav.classList.remove('is-expanded')
-    localStorage.setItem('isMenuExpanded', null)
-    toggleExpandedView.setAttribute('aria-expanded', 'false')
-    toggleExpandedView.querySelector('span').textContent = 'Expand menu'
-    
-    menuIconLabels.forEach(menuIconLabel => {
-      menuIconLabel.classList.add('sr-only')
-    })
-  }
-
-  const checkViewportWidth = () => {
-    if (mediaQuery.matches) {
-      mainNav.classList.add('is-desktop')
-      mainNav.classList.remove('is-mobile')
-
-      collapseMenu()
-    } else {
-      mainNav.classList.remove('is-desktop')
-      mainNav.classList.add('is-mobile')
-
-      collapseMenu()
-    }
-  }
-
-  // execution
-  mainMenu && mainMenu.addEventListener('keydown', event => {
-    const currentMenuItem = event.target.closest('li')
-    const menuItems = [...mainMenu.querySelectorAll('.menu-item')]
-    const currentIndex = menuItems.findIndex(item => item === currentMenuItem)
-
-    const key = event.key
-    let targetItem
-
-    if (key === 'ArrowDown') {
-      event.preventDefault()
-      if (menuItems.indexOf(currentMenuItem) === menuItems.length - 1) {
-        targetItem = menuItems[0]
-      } else {
-        targetItem = menuItems[currentIndex + 1]
-      }
-    }
-
-    if (key === 'ArrowUp') {
-      event.preventDefault()
-      if (menuItems.indexOf(currentMenuItem) === 0) {
-        targetItem = menuItems[menuItems.length - 1]
-      } else {
-        targetItem = menuItems[currentIndex - 1]
-      }
-    }
-
-    if (key === 'Escape') {
-      targetItem = menuItems[0]
-    }
-
-    if (targetItem) {
-      targetItem.querySelector('a, button, input').focus()
-    }
-  })
-
-  toggleExpandedView.addEventListener('click', () => {
-    mainNav.classList.contains('is-expanded')
-      ? collapseMenu()
-      : expandMenu()
-  })
-
-  window.addEventListener('resize', checkViewportWidth)
-
-  setActiveMenuItem()
-  checkViewportWidth()
-
-  if (isMenuExpanded === 'true') {
-    expandMenu()
-  }
-</script>
+        <li>
+            <a href="/messages/" class="flex items-center gap-4">
+              <!-- <Icon pack="majesticons" name="messages-line" /> <span>Messages</span> -->
+            </a>
+        </li>
+        <li> 
+            <a href="/media/" class="flex items-center gap-4">
+              <!-- <Icon pack="majesticons" name="image-line" /> <span>Media</span> -->
+            </a>
+        </li>
+    </ul>
+</aside>
